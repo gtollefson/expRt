@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  # Python API Backend
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./src:/app/src
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./config:/app/config
+    environment:
+      - PYTHONPATH=/app/src
+      - API_KEY=dev-docker-key-123
+      - VECTOR_STORE_PATH=/app/data/vectorstore
+      - MODEL_CACHE_DIR=/app/models
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # R Shiny Frontend (optional)
+  shiny:
+    image: rocker/shiny-verse:latest
+    ports:
+      - "3838:3838"
+    volumes:
+      - ./frontend/shiny:/srv/shiny-server/r-assistant
+    environment:
+      - API_BASE_URL=http://api:8000
+      - API_KEY=dev-docker-key-123
+    depends_on:
+      - api
+    restart: unless-stopped
+
+  # Development tools
+  jupyter:
+    image: jupyter/scipy-notebook:latest
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./notebooks:/home/jovyan/work
+      - ./src:/home/jovyan/work/src
+      - ./data:/home/jovyan/work/data
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+    command: start-notebook.sh --NotebookApp.token=''
+    profiles:
+      - dev
+
+volumes:
+  models_cache:
+  vectorstore_data: 
