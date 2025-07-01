@@ -1,0 +1,10 @@
+Package: TestPackage
+Title: Test Package for LLM Assistant
+Version: 0.1.0
+Author: Test Author
+Maintainer: Test Author <test@example.com>
+Description: A minimal test package for developing the R package LLM assistant.
+License: MIT
+Encoding: UTF-8
+Imports: ggplot2, dplyr
+Suggests: testthat, knitr
