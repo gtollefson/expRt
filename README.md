@@ -1,19 +1,19 @@
-# 🚀 Local R Package Assistant Powered by LLMs
+# Local R Package Assistant Powered by LLMs
 
 A cutting-edge, personal LLM-based assistant for R package development, CRAN maintenance, and reproducibility-focused projects.
 
-## 📊 Current Development Status & Immediate Actions
+## Current Development Status & Immediate Actions
 
 ### **Sprint Status: Foundation Architecture Complete** 
 *Ready for HPCC deployment and dependency installation*
 
-> **🤖 AI Assistant Context Instructions**: 
+> **AI Assistant Context Instructions**: 
 > - **Always read the complete roadmap section below** before making any development decisions
 > - **Follow git best practices** with feature branches, descriptive commits, and automated workflows
 > - **Use this status section** to understand current progress and immediate priorities
 > - **Target system specs**: 32GB RAM, 8 cores, Linux HPCC environment
 
-#### ✅ **Completed Components**
+#### **Completed Components**
 - **Core Architecture**: Complete project structure with 5 main modules
 - **Text Chunking Pipeline**: Advanced chunker with token counting, sliding windows, R-specific metadata extraction
 - **Vector Store Framework**: FAISS-based hierarchical indexing with metadata filtering
@@ -23,7 +23,7 @@ A cutting-edge, personal LLM-based assistant for R package development, CRAN mai
 - **HPCC Integration**: SLURM scripts for environment setup, batch processing, and server deployment
 - **Containerization**: Docker setup for local development and testing
 
-#### 🎯 **Immediate Next Actions** (Priority Order)
+#### **Immediate Next Actions** (Priority Order)
 1. **Git Repository Setup**: Initialize repo, create dev branches, configure automation
 2. **Transfer to HPCC**: `scp -r` entire project to HPCC home directory
 3. **Environment Setup**: Submit `sbatch scripts/slurm/setup_environment.sh` 
@@ -34,7 +34,7 @@ A cutting-edge, personal LLM-based assistant for R package development, CRAN mai
 8. **Deploy API Server**: Submit `sbatch scripts/slurm/run_api_server.sh`
 9. **Connect Frontend**: Configure Shiny app to communicate with HPCC API
 
-#### 🔧 **Git Workflow & Development Rules**
+#### **Git Workflow & Development Rules**
 - **Main Branch**: `main` - production-ready code only
 - **Development Branch**: `develop` - integration branch for features
 - **Feature Branches**: `feature/phase-X-component-name` - specific development tasks
@@ -43,20 +43,20 @@ A cutting-edge, personal LLM-based assistant for R package development, CRAN mai
 - **Push Frequency**: Push to remote after each logical feature completion
 - **Branch Strategy**: Create new feature branch for each roadmap phase/component
 
-#### 🔧 **Technical Implementation Notes**
+#### **Technical Implementation Notes**
 - **Memory Requirements**: 16-32GB RAM for full deployment (32GB recommended)
 - **Model Downloads**: ~2-7GB for embedding + LLM models
 - **API Authentication**: Uses bearer token authentication (dev key: `dev-key-123`)
 - **Port Configuration**: API server runs on port 8000, requires SSH tunneling for external access
 - **Batch Processing**: SLURM array jobs configured for parallel R package processing
 
-#### 🚨 **Known Dependencies to Install**
+#### **Known Dependencies to Install**
 ```bash
 pip install torch sentence-transformers faiss-cpu transformers
 pip install fastapi uvicorn tiktoken langchain llama-index
 ```
 
-#### 📁 **Project Structure Ready**
+#### **Project Structure Ready**
 ```
 r-package-assistant/
 ├── src/chunking/          # Text processing & R package parsing
@@ -68,7 +68,7 @@ r-package-assistant/
 └── requirements.txt      # Python dependencies
 ```
 
-## 🎯 Project Goals
+## Project Goals
 
 - Build a version-aware R package documentation assistant
 - Deploy locally with lightweight LLMs (Phi-3, Mistral 7B)
@@ -76,41 +76,41 @@ r-package-assistant/
 - Support CRAN maintainers and reproducibility workflows
 - Create a sustainable alternative to expensive GPT-powered copilots
 
-## 📋 Development Roadmap
+## Development Roadmap
 
-### ✅ Phase 1: Foundation Build (Weeks 1–2)
+### Phase 1: Foundation Build (Weeks 1–2)
 - [ ] Core token counting and file chunking script
 - [ ] Dynamic chunk sizing with sliding window overlap
 - [ ] Document ingestion pipeline with metadata capture
 - [ ] FAISS-based vector store implementation
 - [ ] Simple retrieval testing script
 
-### ⚡ Phase 2: Backend LLM and Retrieval System (Weeks 3–4)
+### Phase 2: Backend LLM and Retrieval System (Weeks 3–4)
 - [ ] Local model deployment (Phi-3/Mistral 7B on HPCC)
 - [ ] CPU vs GPU inference benchmarking
 - [ ] End-to-end retrieval pipeline integration
 - [ ] Metadata-aware retrieval enhancement
 
-### 🔍 Phase 3: Query Refinement & Quality Boosters (Weeks 5–6)
+### Phase 3: Query Refinement & Quality Boosters (Weeks 5–6)
 - [ ] Hierarchical indexing implementation
 - [ ] Context-aware retrieval mechanism
 - [ ] User query pre-processing (functions, packages, versions)
 - [ ] Cross-encoder re-ranking system
 - [ ] Optional LLM fine-tuning on R documentation
 
-### 🌐 Phase 4: Frontend Integration (Weeks 7–8)
+### Phase 4: Frontend Integration (Weeks 7–8)
 - [ ] Shiny app deployment on shinyapps.io
 - [ ] Flask/FastAPI server on HPCC
 - [ ] API gateway with authentication
 - [ ] Rate limiting and security measures
 
-### 🛠️ Phase 5: Finalization and Optimization (Weeks 9–10)
+### Phase 5: Finalization and Optimization (Weeks 9–10)
 - [ ] Local caching implementation
 - [ ] Performance logging and analysis
 - [ ] Docker containerization
 - [ ] Documentation and deployment guides
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```
 r-package-assistant/
@@ -143,15 +143,23 @@ r-package-assistant/
 3. Run the test pipeline: `python scripts/test_pipeline.py`
 4. Launch the Shiny app: `Rscript frontend/shiny/app.R`
 
-## 📊 Target Metrics
+## Target Metrics
 
 - Retrieval time: < 500ms
 - Accuracy: > 85% on R documentation queries
 - Memory usage: < 16GB for full deployment
 - Concurrent users: 10+ on single HPCC node
 
-## 🎤 Conference Presentation
+## Conference Presentation
 
 **"A Fully Local, Free, and Version-Aware LLM-Powered Assistant for R Package Development and Reproducibility"**
 
 Position as lightweight, sustainable alternative to expensive GPT-powered coding copilots. 
+
+# Quick Start
+
+```bash
+cd /nfs/jbailey5/baileyweb/gtollefs/toolshed/expRt && \
+source ~/mambaforge/bin/activate expRt && \
+python scripts/build_vector_store.py
+```
